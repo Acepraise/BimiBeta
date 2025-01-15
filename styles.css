@@ -1,0 +1,387 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Change to column to allow sidebar to push content */
+    justify-content: center;
+    align-items: center;
+    background-image: url('assets/bg1.jpg'); /* Ensure the background image is set */
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Make sure the pseudo-element is positioned relative to body */
+    padding-top: 0; /* Remove top padding */
+    padding-bottom: 50px; /* Add bottom padding to make space for the input area */
+    transition: background 0.5s ease-in-out; /* Add transition for background */
+}
+
+/* Add a pseudo-element to the body to handle the background blur */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit; /* Use the same background image as the body */
+    background-size: inherit;
+    background-position: inherit;
+    filter: blur(10px); /* Adjust the value as needed */
+    z-index: -1; /* Place it behind the content */
+    transition: filter 0.5s ease-in-out; /* Add transition for filter */
+}
+
+/* Header Styles */
+.header {
+    width: 100%; /* Full width */
+    background-color: white; /* White background */
+    text-align: center;
+    padding: 20px 0; /* Add some padding to give space around the logo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for a subtle effect */
+    position: absolute; /* Absolute positioning to keep it at the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: left 0.3s ease; /* Add transition for smooth adjustment */
+}
+
+.header.open {
+    left: 250px; /* Adjust position to account for sidebar */
+    width: calc(100% - 250px); /* Adjust width to account for sidebar */
+}
+
+.header-image {
+    max-width: 150px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+/* Toolbar Styles */
+.toolbar {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1; /* Ensure the toolbar is above other elements */
+}
+
+.toolbar button {
+    padding: 0.5rem 1rem;
+    background: #06746e;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.toolbar button:hover {
+    background: #0a3758;
+}
+
+.toolbar-icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 1; /* Ensure the toolbar icon is above other elements */
+}
+
+.toolbar-icon i {
+    font-size: 2rem; /* Adjust the size of the icon */
+    color: #06746e;
+    cursor: pointer;
+}
+
+.toolbar-menu {
+    display: none; /* Hide the menu by default */
+    position: absolute;
+    top: 50%;
+    left: 70px; /* Adjust position relative to the icon */
+    transform: translateY(-50%);
+    background: white;
+    padding: 10px;
+    border-radius: 8px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhance shadow for a more professional look */
+    z-index: 2; /* Ensure the menu is above other elements */
+}
+
+.toolbar-menu button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0.5rem 1rem;
+    background: #06746e;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease; /* Add transition for hover effect */
+}
+
+.toolbar-menu button:hover {
+    background: #0a3758; /* Change background color on hover */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed; /* Fixed positioning to keep it in place */
+    top: 0; /* Start from the top */
+    left: 0;
+    width: 250px; /* Adjust the width as needed */
+    height: 100%; /* Full height */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for a subtle effect */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0; /* Add padding for spacing */
+    backdrop-filter: blur(10px); /* Add blur effect to the background */
+    z-index: 2; /* Ensure the sidebar is above other elements */
+    transform: translateX(-250px); /* Initially hide the sidebar */
+    transition: transform 0.3s ease; /* Add transition for smooth opening/closing */
+}
+
+.sidebar.open {
+    transform: translateX(0); /* Show the sidebar */
+}
+
+.sidebar a, .sidebar button {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Add transition for hover effect */
+    background: none; /* Ensure buttons have no background by default */
+    border: none; /* Remove border for buttons */
+    cursor: pointer; /* Add pointer cursor for buttons */
+    border-bottom: 1px solid transparent; /* Add transparent border for underline effect */
+    font-family: 'Helvetica', 'Arial', sans-serif; /* Change font to Helvetica or similar */
+}
+
+.sidebar a:hover, .sidebar button:hover {
+    color: #06746e; /* Change text color on hover */
+    border-bottom: 1px solid #06746e; /* Add underline effect on hover */
+}
+
+/* Message and Input Area */
+.intro-message {
+    font-size: 5.2rem;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 0; /* Remove top margin */
+    font-weight: bold;
+    transition: margin-left 0.3s ease; /* Add transition for smooth adjustment */
+}
+
+.intro-message.open {
+    margin-left: 250px; /* Adjust margin to account for sidebar */
+}
+
+/* Remove the messages container styles */
+.messages {
+    display: none; /* Hide the messages container */
+}
+
+/* Input and Button */
+.input-area {
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 20px; /* Position the input area at the bottom */
+    left: 0;
+    transition: left 0.3s ease; /* Add transition for smooth adjustment */
+}
+
+.input-area.open {
+    left: 250px; /* Adjust position to account for sidebar */
+    width: calc(100% - 250px); /* Adjust width to account for sidebar */
+}
+
+/* Input and Button */
+.input-area input {
+    flex: 1;
+    max-width: 400px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.input-area button {
+    padding: 0.5rem 1rem;
+    background: #06746e;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease; /* Add transition for hover effect */
+}
+
+.input-area button:hover {
+    background: #0a3758;
+}
+
+/* Settings Page Styles */
+.settings-container {
+    max-width: 600px;
+    margin: 100px auto 0; /* Center the settings container */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Add blur effect to the background */
+}
+
+.settings-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.settings-option {
+    margin-bottom: 20px;
+}
+
+.settings-option label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.settings-option input[type="text"],
+.settings-option input[type="email"],
+.settings-option input[type="password"],
+.settings-option select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.settings-option input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.settings-option button {
+    padding: 10px 20px;
+    background: #06746e;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease; /* Add transition for hover effect */
+}
+
+.settings-option button:hover {
+    background: #0a3758;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 600px) {
+    .header-image {
+        max-width: 100px;
+    }
+
+    .intro-message {
+        font-size: 1rem;
+    }
+
+    .input-area {
+        flex-direction: column;
+        gap: 0.5rem;
+        bottom: 10px; /* Adjust bottom position for smaller screens */
+    }
+
+    .input-area input {
+        font-size: 0.9rem;
+        max-width: 100%; /* Ensure input takes full width */
+    }
+
+    .input-area button {
+        font-size: 0.9rem;
+        width: 100%; /* Ensure button takes full width */
+    }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .header {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .intro-message {
+    color: #ffffff;
+}
+
+body.dark-mode .input-area input {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #06746e;
+}
+
+body.dark-mode .input-area button {
+    background: #06746e; /* Retain the original background color */
+}
+
+body.dark-mode .input-area button:hover {
+    background: #0a3758; /* Retain the original hover color */
+}
+
+body.dark-mode .sidebar {
+    background-color: rgba(30, 30, 30, 0.9); /* Dark mode background */
+}
+
+body.dark-mode .sidebar a, body.dark-mode .sidebar button {
+    color: #fff; /* Dark mode text color */
+    border-bottom: 1px solid transparent; /* Add transparent border for underline effect */
+    font-family: 'Helvetica', 'Arial', sans-serif; /* Change font to Helvetica or similar */
+}
+
+body.dark-mode .sidebar a:hover, body.dark-mode .sidebar button:hover {
+    color: #fff; /* Change text color on hover */
+    background-color: #0a3758; /* Set hover background color to blue */
+}
+
+body.dark-mode .settings-container {
+    background: rgba(30, 30, 30, 0.9); /* Dark mode background */
+}
+
+body.dark-mode .settings-container h1,
+body.dark-mode .settings-option label {
+    color: #fff; /* Dark mode text color */
+}
+
+body.dark-mode .settings-option input[type="text"],
+body.dark-mode .settings-option input[type="email"],
+body.dark-mode .settings-option input[type="password"],
+body.dark-mode .settings-option select {
+    background: #333;
+    color: #fff;
+    border: 1px solid #06746e;
+}

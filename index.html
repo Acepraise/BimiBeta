@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bimi Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="shortcut icon" href="assets\bimi.png" type="image/x-icon">
+  <!-- Link to Font Awesome for toolbar icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header" style="text-align: center;">
+        <div class="toolbar-icon">
+            <i class="fas fa-bars" onclick="toggleToolbar()"></i> <!-- Use Font Awesome icon -->
+        </div>
+        <img src="assets/bimi.png" alt="AI Assistant Logo" class="header-image">
+    </div>
+    <div class="sidebar">
+        <a href="#">Sign Up</a>
+        <a href="#">Sign In</a>
+        <a href="#">Access eLearning</a>
+        <a href="#">Give Feedback</a>
+        <button id="darkModeToggle">Dark Mode ON/OFF</button> <!-- Move dark mode button here -->
+        <div class="settings-icon" style="margin-top: auto; padding: 20px;">
+            <a href="settings.html"><i class="fas fa-cog" style="font-size: 1.5rem; cursor: pointer;"></i></a> <!-- Settings icon -->
+        </div>
+    </div>
+    <div class="intro-message">
+        Hello Active Citizen
+    </div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Ask me anything..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
