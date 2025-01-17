@@ -14,7 +14,7 @@ body {
     flex-direction: column; /* Change to column to allow sidebar to push content */
     justify-content: center;
     align-items: center;
-    background-image: url('assets/bg1.jpg'); /* Ensure the background image is set */
+    background-image: url('assets/bg8.jpg'); /* Ensure the background image is set */
     background-size: cover;
     background-position: center;
     position: relative; /* Make sure the pseudo-element is positioned relative to body */
@@ -59,7 +59,7 @@ body::before {
 }
 
 .header-image {
-    max-width: 150px; /* Adjust the size of the logo */
+    max-width: 40px; /* Adjust the size of the logo */
     height: auto;
 }
 
@@ -98,7 +98,21 @@ body::before {
 }
 
 .toolbar-icon i {
-    font-size: 2rem; /* Adjust the size of the icon */
+    font-size: 1rem; /* Adjust the size of the icon */
+    color: #06746e;
+    cursor: pointer;
+}
+
+.chat-icon {
+    position: absolute;
+    top: 50%;
+    left: 60px; /* Adjust position relative to the toolbar icon */
+    transform: translateY(-50%);
+    z-index: 1; /* Ensure the chat icon is above other elements */
+}
+
+.chat-icon i {
+    font-size: 1rem; /* Adjust the size of the icon */
     color: #06746e;
     cursor: pointer;
 }
@@ -170,7 +184,10 @@ body::before {
     border: none; /* Remove border for buttons */
     cursor: pointer; /* Add pointer cursor for buttons */
     border-bottom: 1px solid transparent; /* Add transparent border for underline effect */
-    font-family: 'Helvetica', 'Arial', sans-serif; /* Change font to Helvetica or similar */
+    font-family: 'Ubuntu', sans-serif; /* Change font to Ubuntu */
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: bold; /* Make text bold */
+    font-style: normal; /* Remove italic style */
 }
 
 .sidebar a:hover, .sidebar button:hover {
@@ -178,9 +195,73 @@ body::before {
     border-bottom: 1px solid #06746e; /* Add underline effect on hover */
 }
 
+.sidebar .faq-dropdown {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    background: none;
+    border: none;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: bold;
+    font-style: normal;
+    display: flex;
+    justify-content: center; /* Center text and icon */
+    align-items: center;
+}
+
+.sidebar .faq-dropdown i {
+    margin-left: 10px; /* Add space between text and icon */
+    transition: transform 0.3s ease; /* Add transition for rotation */
+}
+
+.sidebar .faq-dropdown:hover {
+    color: #06746e;
+    border-bottom: 1px solid #06746e;
+}
+
+.sidebar .faq-content {
+    display: flex; /* Ensure flex display */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.sidebar .faq-content.open {
+    max-height: 400px; /* Increase max-height to accommodate all texts */
+}
+
+.sidebar .faq-dropdown.open i {
+    transform: rotate(180deg); /* Rotate icon when open */
+}
+
+.sidebar .faq-content a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    transition: color 0.3s ease;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.7rem; /* Reduced font size */
+    font-weight: normal;
+}
+
+.sidebar .faq-content a:hover {
+    color: #06746e;
+}
+
 /* Message and Input Area */
 .intro-message {
-    font-size: 5.2rem;
+    font-size: 1.3rem;
     color: #ffffff;
     text-align: center;
     margin-top: 0; /* Remove top margin */
@@ -217,21 +298,21 @@ body::before {
 /* Input and Button */
 .input-area input {
     flex: 1;
-    max-width: 400px;
-    padding: 0.8rem;
+    max-width: 300px; /* Reduced max-width */
+    padding: 0.5rem; /* Reduced padding */
     border: 1px solid #ccc;
     border-radius: 20px;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduced font size */
 }
 
 .input-area button {
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.8rem; /* Reduced padding */
     background: #06746e;
     color: #fff;
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduced font size */
     transition: background 0.3s ease; /* Add transition for hover effect */
 }
 
@@ -300,28 +381,97 @@ body::before {
 
 /* Mobile responsive styles */
 @media screen and (max-width: 600px) {
+    .header {
+        padding: 10px 0; /* Reduce padding for smaller screens */
+    }
+
     .header-image {
-        max-width: 100px;
+        max-width: 30px; /* Reduce logo size for smaller screens */
+    }
+
+    .toolbar-icon, .chat-icon {
+        top: 10px; /* Adjust position for smaller screens */
+        left: 10px; /* Adjust position for smaller screens */
+    }
+
+    .chat-icon {
+        left: 50px; /* Adjust position relative to the toolbar icon */
     }
 
     .intro-message {
-        font-size: 1rem;
+        font-size: 1rem; /* Reduce font size for smaller screens */
+        margin-left: 0; /* Remove margin adjustment for smaller screens */
+        padding: 10px; /* Add padding for better spacing */
+    }
+
+    .sidebar {
+        width: 200px; /* Reduce sidebar width for smaller screens */
+        transform: translateX(-200px); /* Adjust transform for smaller screens */
+    }
+
+    .sidebar.open {
+        transform: translateX(0); /* Show the sidebar */
+    }
+
+    .sidebar a, .sidebar button {
+        font-size: 0.8rem; /* Reduce font size for smaller screens */
+        padding: 8px 16px; /* Adjust padding for smaller screens */
+    }
+
+    .faq-dropdown {
+        padding: 8px 16px; /* Adjust padding for smaller screens */
+    }
+
+    .faq-content a {
+        font-size: 0.7rem; /* Reduce font size for smaller screens */
+        padding: 4px 0; /* Adjust padding for smaller screens */
     }
 
     .input-area {
-        flex-direction: column;
+        flex-direction: column; /* Stack input and button vertically */
         gap: 0.5rem;
         bottom: 10px; /* Adjust bottom position for smaller screens */
+        width: 90%; /* Adjust width for smaller screens */
+        left: 5%; /* Center the input area */
     }
 
     .input-area input {
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* Reduce font size */
         max-width: 100%; /* Ensure input takes full width */
+        padding: 0.4rem; /* Reduce padding */
     }
 
     .input-area button {
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* Reduce font size */
         width: 100%; /* Ensure button takes full width */
+        padding: 0.3rem 0.6rem; /* Reduce padding */
+    }
+
+    .settings-container {
+        width: 90%; /* Adjust width for smaller screens */
+        margin: 50px auto 0; /* Adjust margin for smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .settings-container h1 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .settings-option label {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+
+    .settings-option input[type="text"],
+    .settings-option input[type="email"],
+    .settings-option input[type="password"],
+    .settings-option select {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    .settings-option button {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        padding: 8px 16px; /* Adjust padding for smaller screens */
     }
 }
 
@@ -360,7 +510,8 @@ body.dark-mode .sidebar {
 body.dark-mode .sidebar a, body.dark-mode .sidebar button {
     color: #fff; /* Dark mode text color */
     border-bottom: 1px solid transparent; /* Add transparent border for underline effect */
-    font-family: 'Helvetica', 'Arial', sans-serif; /* Change font to Helvetica or similar */
+    font-family: 'Ubuntu', sans-serif; /* Change font to Ubuntu */
+    font-style: normal; /* Remove italic style */
 }
 
 body.dark-mode .sidebar a:hover, body.dark-mode .sidebar button:hover {
@@ -384,4 +535,136 @@ body.dark-mode .settings-option select {
     background: #333;
     color: #fff;
     border: 1px solid #06746e;
+}
+
+body.dark-mode .message {
+    background: #333333; /* Dark mode background for chat messages */
+    color: #ffffff; /* Dark mode text color for chat messages */
+}
+
+body.dark-mode .message.user {
+    background: #007bff; /* Retain the original background color for user messages */
+    color: white; /* Retain the original text color for user messages */
+}
+
+body.dark-mode .message.ai {
+    background: none; /* Remove background for AI messages */
+    color: #ffffff; /* Dark mode text color for AI messages */
+}
+
+body.dark-mode .chat-container {
+    background-color: #121212; /* Dark mode background for chat area */
+    width: 100vw; /* Full width */
+    height: calc(100vh - 70px); /* Full height minus header height */
+    position: fixed; /* Cover the entire window */
+    top: 70px; /* Start exactly below the header */
+    left: 0;
+    z-index: 0; /* Ensure it is behind other elements */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    transition: left 0.3s ease; /* Add transition for smooth adjustment */
+    padding-bottom: 70px; /* Add padding to ensure background covers until the input area */
+}
+
+/* Chat Message Styles */
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    background: #e9ecef;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem; /* Reduced font size */
+}
+
+.message.user {
+    background: #007bff;
+    color: white; /* Ensure text color is white */
+    align-self: flex-end;
+    text-align: right; /* Align text to the right */
+}
+
+.message.ai {
+    background: none; /* Remove background for AI messages */
+    color: #333; /* Ensure text color is dark */
+    align-self: flex-start;
+    text-align: left; /* Align text to the left */
+}
+
+.message .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 0; /* Make the avatar square */
+    margin-right: 10px;
+}
+
+button, .toolbar-icon i, .chat-icon i {
+    position: relative; /* Ensure the element is positioned relative to the tooltip */
+}
+
+/* Remove the tooltip styles */
+button::after, .toolbar-icon i::after, .chat-icon i::after {
+    content: none; /* Remove tooltip content */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 400px; /* Max width for modal */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better appearance */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.chat-container {
+    background-color: #ffffff; /* Light mode background for chat area */
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    position: fixed; /* Cover the entire window */
+    top: 0; /* Start from the top */
+    left: 0;
+    z-index: 0; /* Ensure it is behind other elements */
+    transition: left 0.3s ease; /* Add transition for smooth adjustment */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    padding-top: 70px; /* Add padding to ensure background covers until the input area */
+    padding-bottom: 70px; /* Add padding to ensure background covers until the input area */
+}
+
+.chat-container.open {
+    left: 0; /* Ensure it stays at the left */
+    width: 100vw; /* Ensure it covers the full width */
+}
+
+body.dark-mode .chat-container {
+    background-color: #121212; /* Dark mode background for chat area */
 }

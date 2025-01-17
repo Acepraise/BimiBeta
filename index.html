@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bimi Prototype</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="shortcut icon" href="assets\bimi.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/bimi.png" type="image/x-icon">
   <!-- Link to Font Awesome for toolbar icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -13,6 +13,9 @@
     <div class="header" style="text-align: center;">
         <div class="toolbar-icon">
             <i class="fas fa-bars" onclick="toggleToolbar()"></i> <!-- Use Font Awesome icon -->
+        </div>
+        <div class="chat-icon">
+            <i class="fas fa-pencil-alt" onclick="startNewChat()"></i> <!-- New chat icon with pencil -->
         </div>
         <img src="assets/bimi.png" alt="AI Assistant Logo" class="header-image">
     </div>
@@ -22,17 +25,53 @@
         <a href="#">Access eLearning</a>
         <a href="#">Give Feedback</a>
         <button id="darkModeToggle">Dark Mode ON/OFF</button> <!-- Move dark mode button here -->
+        <div class="faq-dropdown" onclick="toggleFAQ()" style="text-align: center;">
+            FAQ <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-content">
+            <a href="#">What is the total budget for Lagos state in 2024?</a>
+            <a href="#">How much was allocated to education in Kaduna state for the year 2025?</a>
+            <a href="#">What are the top expenditure items for Oyo state?</a>
+            <a href="#">How much has Edo state's budget execution changed over the past three years?</a>
+            <a href="#">How do I use BIMI effectively?</a>
+        </div>
         <div class="settings-icon" style="margin-top: auto; padding: 20px;">
             <a href="settings.html"><i class="fas fa-cog" style="font-size: 1.5rem; cursor: pointer;"></i></a> <!-- Settings icon -->
         </div>
     </div>
     <div class="intro-message">
-        Hello Active Citizen
+        Hello! I'm Bimi, your AI assistant. How can I help you today?
     </div>
     <div class="input-area">
-        <input type="text" id="userInput" placeholder="Ask me anything..." />
+        <input type="text" id="userInput" placeholder="Ask me anything..." onkeydown="handleKeyDown(event)" />
         <button onclick="sendMessage()">Send</button>
     </div>
     <script src="script.js"></script>
+    <script>
+    function createChatContainer() {
+        const body = document.querySelector('body');
+        const sidebar = document.querySelector('.sidebar');
+        const header = document.querySelector('.header');
+        const inputArea = document.querySelector('.input-area');
+        
+        // Ensure sidebar, header, and input area are visible
+        sidebar.style.zIndex = '1';
+        header.style.zIndex = '1';
+        inputArea.style.zIndex = '1';
+
+        const chatContainer = document.createElement('div');
+        chatContainer.className = 'chat-container open'; // Add class for dark mode styling and toggling
+        chatContainer.style.display = 'flex';
+        chatContainer.style.flexDirection = 'column';
+        chatContainer.style.alignItems = 'center';
+        chatContainer.style.justifyContent = 'flex-start'; // Align items to the top
+        chatContainer.style.width = '100%';
+        chatContainer.style.height = '100vh'; // Ensure full height
+        chatContainer.style.marginTop = '20px'; // Add margin to separate from header
+        chatContainer.style.paddingBottom = '70px'; // Add padding to ensure background covers until the input area
+
+        body.appendChild(chatContainer);
+    }
+    </script>
 </body>
 </html>
